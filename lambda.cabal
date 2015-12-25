@@ -1,0 +1,37 @@
+Name:                lambda
+Version:             0.1.0.0
+License:             GPL-3
+License-file:        LICENSE
+Author:              Justin Manley
+Maintainer:          manleyjster@gmail.com
+Category:            Language
+Build-type:          Simple
+Cabal-version:       >=1.20
+
+Library
+  Build-tools:         alex,
+                       happy
+  Build-depends:       base >=4.7 && <4.8,
+                       haskell-src >=1.0.2.0,
+                       array >=0.5
+  Exposed-modules:     Language.Lambda.Grammar,
+                       Language.Lambda.Tokens,
+                       Language.Lambda.AST
+  Default-language:    Haskell2010
+
+Executable lambda
+  Main-is:             Lambda.hs
+  Build-tools:         alex,
+                       happy
+  Build-depends:       base >=4.7 && <4.8,
+                       haskell-src >=1.0.2.0,
+                       lambda
+  Default-language:    Haskell2010
+
+Executable lambda-compiler
+  Main-is:             Language/Lambda/Compiler.hs
+  Build-depends:       base >=4.7 && <4.8,
+                       lambda
+  Build-tools:         alex,
+                       happy
+  Default-language:    Haskell2010
