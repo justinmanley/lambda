@@ -10,7 +10,16 @@ mkMain :: HsExp -> HsModule
 mkMain exp = HsModule emptySrcLoc (Module "Main") Nothing [] 
     $ [ HsFunBind $ [ HsMatch emptySrcLoc (HsIdent "main") [] body [] ] ]
     where 
-        body = HsUnGuardedRhs exp
+        hsPutStrLn, hsShow :: HsExp
+        hsPutStrLn = HsVar . UnQual . HsIdent $ "putStrLn"
+        hsShow = HsVar . UnQual . HsIdent $ "show"
+
+        hsCompose :: HsQOp 
+        hsCompose = HsQVarOp . UnQual . HsSymbol $ "."
+
+        body :: HsRhs
+        body = HsUnGuardedRhs $
+            HsApp (HsInfixApp hsPutStrLn hsCompose hsShow) (HsParen exp)
 
 -- The depth is used for generating variable patterns in lambdas.
 genExp :: Int -> Annotated a -> HsExp
