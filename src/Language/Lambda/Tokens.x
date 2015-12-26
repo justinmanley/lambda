@@ -1,5 +1,5 @@
 { 
-module Language.Lambda.Tokens (tokenize, Token(..)) where 
+module Language.Lambda.Tokens ( tokenize, Token(..)) where 
 }
 
 %wrapper "basic"

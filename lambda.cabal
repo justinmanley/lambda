@@ -9,28 +9,24 @@ Build-type:          Simple
 Cabal-version:       >=1.20
 
 Library
+  Hs-source-dirs:      src
   Build-tools:         alex,
                        happy
   Build-depends:       base >=4.7 && <4.8,
                        haskell-src >=1.0.2.0,
                        array >=0.5
-  Exposed-modules:     Language.Lambda.Grammar,
+  Exposed-modules:     Language.Lambda.AST,
+                       Language.Lambda.Codegen,
+                       Language.Lambda.Compiler,
+                       Language.Lambda.Grammar,
                        Language.Lambda.Tokens,
-                       Language.Lambda.AST
-  Default-language:    Haskell2010
-
-Executable lambda
-  Main-is:             Lambda.hs
-  Build-tools:         alex,
-                       happy
-  Build-depends:       base >=4.7 && <4.8,
-                       haskell-src >=1.0.2.0,
-                       lambda
+                       Language.Lambda.Types
   Default-language:    Haskell2010
 
 Executable lambda-compiler
-  Main-is:             Language/Lambda/Compiler.hs
+  Main-is:             Compiler.hs
   Build-depends:       base >=4.7 && <4.8,
+                       haskell-src >=1.0.2.0,
                        lambda
   Build-tools:         alex,
                        happy

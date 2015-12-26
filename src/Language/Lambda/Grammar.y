@@ -21,16 +21,16 @@ import Language.Lambda.AST
 
 %%
 
-Expression  : lambda Expression         { LambdaExp $2 }
-            | ApplicandExp Expression   { AppExp $1 $2 } 
+Expression  : lambda Expression         { untyped $ LambdaExp $2 }
+            | ApplicandExp Expression   { untyped $ AppExp $1 $2 } 
             | '(' Expression ')'        { $2 }
-            | '(' TupleExp ')'          { TupleExp $2 } 
-            | var                       { VarExp (Var $1) }
-            | int                       { IntLiteral $1 } 
-            | bool                      { BoolLiteral $1 }
-            | string                    { StringLiteral $1 }
+            | '(' TupleExp ')'          { untyped $ TupleExp $2 } 
+            | var                       { untyped $ VarExp (Var $1) }
+            | int                       { untyped $ IntLiteral $1 } 
+            | bool                      { untyped $ BoolLiteral $1 }
+            | string                    { untyped $ StringLiteral $1 }
 
-ApplicandExp    : var                   { VarExp (Var $1) }
+ApplicandExp    : var                   { untyped $ VarExp (Var $1) }
                 | '(' Expression ')'    { $2 }
 
 TupleExp    : Expression ',' Expression { [$3, $1] }
